@@ -1,0 +1,63 @@
+// const String starterConfig = '''project_name: new_project
+// org: com.example
+// version: 0.0.1+1
+// github: git@github.com:example/project_name.git
+// sentry_dsn: 1234qwer
+// api_host: google.com
+
+// models:
+//   - user
+//   - task
+
+// repos:
+//   - auth
+//   - tasks
+
+// pages:
+//   - splash
+//   - home
+// ''';
+
+const String starterConfig = '''{
+  "project_name": "new_project",
+  "org": "com.example",
+  "version": "0.0.1+1",
+  "github": "git@github.com:example/project_name.git",
+  "sentry_dsn": "1234qwer",
+  "api_host": "google.com",
+  "models": {
+    "user": {
+      "name": "str",
+      "age": "int",
+      "is_active": "bool=false"
+    },
+    "task": {
+      "owner": "user",
+      "checks": "str[]"
+    }
+  },
+  "repos": ["auth", "tasks"],
+  "pages": ["splash", "home"]
+}''';
+
+// const qwer = {
+//   "project_name": "new_project",
+//   "org": "com.example",
+//   "version": "0.0.1+1",
+//   "github": "git@github.com:example/project_name.git",
+//   "sentry_dsn": "1234qwer",
+//   "api_host": "google.com",
+//   "models": {
+//     "user": {
+//       "name": "str",
+//       "age": "int",
+//       "is_active": "bool=false"
+//     },
+//     "task": {
+//       "owner": "user",
+//       "checks": "str[]"
+//     }
+//   },
+//   "repos": ["auth", "tasks"],
+//   "pages": ["splash", "home"]
+// };
