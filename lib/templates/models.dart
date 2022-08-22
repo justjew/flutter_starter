@@ -22,6 +22,8 @@ part '&snakeName&.g.dart';
 
 @freezed
 class &upperName& extends BaseModel with _\$&upperName& {
+  const &upperName&._();
+
   const factory &upperName&({
     required dynamic id,
 &fields&
