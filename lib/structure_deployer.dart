@@ -49,11 +49,8 @@ class StructureDeployer {
     _createAnalysisOptions();
     print('Analysis options created');
 
-    _createApp();
+    _createBootstrap();
     print('Entry point created');
-
-    // File('$absPath/starter_config.json').deleteSync();
-    // print('starter_config.json was removed');
   }
 
   void _createDirectories() {
@@ -62,7 +59,7 @@ class StructureDeployer {
       'sksl_cache': null,
       'dev': null,
       'lib': {
-        'app': null,
+        'bootstrap': null,
         'config': null,
         'models': null,
         'shared': null,
@@ -254,16 +251,12 @@ class StructureDeployer {
     File('$absPath/analysis_options.yaml').writeAsStringSync(analysisOptionsText);
   }
 
-  void _createApp() {
+  void _createBootstrap() {
     File('$absPath/lib/main.dart').writeAsStringSync(mainText);
-    File('$absPath/lib/app/dio_client.dart').writeAsStringSync(dioClientText);
-    File('$absPath/lib/app/app.dart').writeAsStringSync(appText);
-    File('$absPath/lib/app/navigator_builder.dart').writeAsStringSync(navigatorBuilderText);
-    File('$absPath/lib/app/navigator_cubit.dart').writeAsStringSync(navigatorCubitText);
-  }
-
-  void _runBuilder() {
-    print('flutter pub run build_runner build');
-    Process.runSync('flutter', ['pub', 'run', 'build_runner', 'build']);
+    File('$absPath/lib/bootstrap/dio_client.dart').writeAsStringSync(dioClientText);
+    File('$absPath/lib/bootstrap/bootstrap.dart').writeAsStringSync(bootstrapText);
+    File('$absPath/lib/bootstrap/navigator_builder.dart').writeAsStringSync(navigatorBuilderText);
+    File('$absPath/lib/bootstrap/navigator_cubit.dart').writeAsStringSync(navigatorCubitText);
+    File('$absPath/lib/bootstrap/store_provider.dart').writeAsStringSync(storeProviderText);
   }
 }

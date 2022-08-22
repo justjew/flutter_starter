@@ -2,12 +2,12 @@ const String mainText = '''import 'package:flutter/material.dart';
 
 import 'shared/hive_init.dart';
 import 'shared/sentry_wrapper.dart';
-import 'app/app.dart';
+import 'bootstrap/bootstrap.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await hiveInit();
-  sentryWrap(() async => runApp(const App()));
+  sentryWrap(() async => runApp(const Bootstrap()));
 }''';
 
 const String dioClientText = '''import 'package:shindenshin/shindenshin.dart';
@@ -26,7 +26,7 @@ Dio getDioClient() {
 }
 ''';
 
-const String appText = '''import 'package:flutter/material.dart';
+const String bootstrapText = '''import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shindenshin/shindenshin.dart';
@@ -36,14 +36,14 @@ import 'dio_client.dart';
 import 'navigator_cubit.dart';
 import 'navigator_builder.dart';
 
-class App extends StatefulWidget {
-  const App({Key? key}) : super(key: key);
+class Bootstrap extends StatefulWidget {
+  const Bootstrap({Key? key}) : super(key: key);
 
   @override
-  State<App> createState() => _AppState();
+  State<Bootstrap> createState() => _BootstrapState();
 }
 
-class _AppState extends State<App> with WidgetsBindingObserver {
+class _BootstrapState extends State<Bootstrap> with WidgetsBindingObserver {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   late final BaseApiClient apiClient;
   late final Store store;
@@ -164,3 +164,30 @@ class NavigatorCubit extends Cubit<List<Page>> {
   }
 }
 ''';
+
+const String storeProviderText = '''import 'package:flutter/material.dart';
+import '../store/store.dart';
+
+class StoreProvider extends InheritedWidget {
+  final Store store;
+
+  const StoreProvider({
+    super.key,
+    required this.store,
+    required super.child,
+  });
+
+  @override
+  bool updateShouldNotify(covariant InheritedWidget oldWidget) => true;
+
+  static StoreProvider of(BuildContext context) {
+    final StoreProvider? provider = context.dependOnInheritedWidgetOfExactType<StoreProvider>();
+    assert(provider != null, 'StoreProvider not found in context');
+    return provider!;
+  }
+
+  static Store storeOf(BuildContext context) {
+    return of(context).store;
+  }
+}''';
+
