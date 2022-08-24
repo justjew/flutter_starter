@@ -174,20 +174,16 @@ class StructureDeployer {
   }
 
   void _createStore() {
-    String importsContent = '';
     String repoConstructorsContent = '';
 
     for (final repo in config.repos) {
       final ReCase reCase = ReCase(repo);
-      final String snakeName = reCase.snakeCase;
       final String upperName = reCase.pascalCase;
 
-      importsContent = '${importsContent}import \'repos/${snakeName}_repo.dart\';\n';
       repoConstructorsContent = '$repoConstructorsContent    ${upperName}Repo.new,\n';
     }
 
     final String content = _fillTemplate(storeText, fields: {
-      '&repoImports&': importsContent,
       '&repoConstructors&': repoConstructorsContent,
     });
     File('$absPath/lib/store/store.dart').writeAsStringSync(content);

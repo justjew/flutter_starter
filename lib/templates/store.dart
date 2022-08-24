@@ -5,7 +5,8 @@ class &upperName&Repo extends BaseRepo {
 }''';
 
 const String storeText = '''import 'package:shindenshin/shindenshin.dart';
-&repoImports&
+import 'repos.dart';
+
 class Store extends BaseStore {
   Store(BaseApiClient apiClient) : super(apiClient, [
 &repoConstructors&
