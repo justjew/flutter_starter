@@ -168,7 +168,7 @@ class StructureDeployer {
     final List<String> sortedRepos = config.repos.toList()..sort();
     for (final repo in sortedRepos) {
       final String snakeName = ReCase(repo).snakeCase;
-      content = '${content}export "repos/${snakeName}_repo.dart";\n';
+      content = '${content}export \'repos/${snakeName}_repo.dart\';\n';
     }
     File('$absPath/lib/store/repos.dart').writeAsStringSync(content);
   }
@@ -182,7 +182,7 @@ class StructureDeployer {
       final String snakeName = reCase.snakeCase;
       final String upperName = reCase.pascalCase;
 
-      importsContent = '${importsContent}import "repos/${snakeName}_repo.dart";\n';
+      importsContent = '${importsContent}import \'repos/${snakeName}_repo.dart\';\n';
       repoConstructorsContent = '$repoConstructorsContent    ${upperName}Repo.new,\n';
     }
 
@@ -199,7 +199,7 @@ class StructureDeployer {
       final ReCase reCase = ReCase(page);
       _createSinglePage(reCase);
       final String snakeName = reCase.snakeCase;
-      exportContent = '${exportContent}export "$snakeName/${snakeName}_page.dart";\n';
+      exportContent = '${exportContent}export \'$snakeName/${snakeName}_page.dart\';\n';
     }
     File('$absPath/lib/pages/pages.dart').writeAsStringSync(exportContent);
   }
